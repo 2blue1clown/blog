@@ -12,8 +12,8 @@ export function useLogin() {
         AuthenticationService.logout()
     }
 
-    const login = (formData:FormData) => {
-        const isAuthenticated = AuthenticationService.login(toJSON(formData))
+    const login = async (formData:FormData) => {
+        const isAuthenticated = await AuthenticationService.login(toJSON(formData))
         setAuthenticated(isAuthenticated)
         if(isAuthenticated === false) { alert("Failed login attempt. Make sure username and password are correct") }
     }

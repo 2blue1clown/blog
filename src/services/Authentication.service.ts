@@ -5,15 +5,28 @@ interface LoginDetails {
 }
 
 export const AuthenticationService = {
-    login(json:LoginDetails) {
+    async login(json:LoginDetails) {
         console.log('...attempting login with',json)
-        if(true){
-            window.localStorage.setItem('username',json.username)
-            window.localStorage.setItem('jwt','token')
-            return true
-        } else {
+
+        const res = await fetch(process.env.backendLoginUrl as string, {
+            method:"POST",
+            mode:'cors',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(json)
+        })
+
+        console.log(res.status)
+        if(res.status >= 400) {
             return false
         }
+
+        const responseJson = await res.json()
+        console.log(responseJson)
+        window.localStorage.setItem('username',json.username)
+        window.localStorage.setItem('jwt',responseJson.token)
+        return true
     },
     logout() {
         console.log('logging out')
