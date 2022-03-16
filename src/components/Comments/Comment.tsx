@@ -1,4 +1,4 @@
-import { Heading, HStack, Text, useColorModeValue, VStack } from "@chakra-ui/react"
+import { Heading, HStack, Text, VStack } from "@chakra-ui/react"
 import type {Comment as CommentType} from "../../services/Comments.service"
 
 interface CommentProps {
@@ -7,10 +7,10 @@ interface CommentProps {
 
 const Comment = (props:CommentProps) => {
 
-    const value = useColorModeValue('gray.50','gray.900')
+
 
     return (
-        <VStack w="full" maxW={'90ch'} bg={value}>
+        <VStack w="full" maxW={'90ch'}>
             <HStack w='full'justifyContent={"space-between"}>
                 <Heading as='h3' size='md' >{props.comment.topic}</Heading>
                 <HStack>

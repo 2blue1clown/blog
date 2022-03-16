@@ -13,7 +13,7 @@ interface NewCommentProps {
 const NewComment = (props:NewCommentProps) => {
 
     const handleNewComment = (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault()  
+        e.preventDefault() 
         const formData = new FormData(e.currentTarget)
 
         const newComment:Comment = {
@@ -22,6 +22,7 @@ const NewComment = (props:NewCommentProps) => {
          }
 
         props.addComment(newComment)
+        e.currentTarget.reset()
         
         //get comments from the database
     }
@@ -34,7 +35,7 @@ const NewComment = (props:NewCommentProps) => {
 
                 <FormControl w='full' maxW='90ch' >
                     <VStack spacing={3} alignItems="start">
-                    <Input w='full' id='topic' name="topic" placeholder='Enter topic sentance'></Input>    
+                    <Input w='full' id='topic' name="topic" placeholder='Enter topic sentence'></Input>    
                     <Textarea w='full' name='content' placeholder="Enter comment"></Textarea>
 
                     <Button type="submit">Post comment</Button>

@@ -14,15 +14,20 @@ const Comments = () => {
 
     const { authenticated } = useContext(UserContext)
 
-    useEffect(()=> {
-        const res = CommentsService.get()
-        setComments(res)
+    useEffect( ()=> {
+        const fetchData = async () => {
+            const res = await CommentsService.get()
+            setComments(res)
+        }
+        fetchData()
     },[])
 
     const addComment = async (newComment:CommentType ) => {
-        const res = CommentsService.post(newComment)
-        console.log(res)
-        setComments([...comments,res]) //this is throwing an error for some reason.
+        const res = await CommentsService.post(newComment)
+        if(res){
+            setComments([...comments,res]) //this is throwing an error for some reason.
+        }
+
     }
 
     return (  

@@ -6,7 +6,6 @@ interface LoginDetails {
 
 export const AuthenticationService = {
     async login(json:LoginDetails) {
-        console.log('...attempting login with',json)
 
         const res = await fetch(process.env.backendLoginUrl as string, {
             method:"POST",
@@ -23,7 +22,6 @@ export const AuthenticationService = {
         }
 
         const responseJson = await res.json()
-        console.log(responseJson)
         window.localStorage.setItem('username',json.username)
         window.localStorage.setItem('jwt',responseJson.token)
         return true
