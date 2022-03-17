@@ -1,7 +1,7 @@
+import { VStack } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Comments from '../src/components/Comments/Comments'
-import MainContent from '../src/components/MainContent'
+import Link from 'next/link'
 
 
 const Home: NextPage = () => {
@@ -15,8 +15,10 @@ const Home: NextPage = () => {
       <header>
       </header>
       <main>
-        <MainContent></MainContent>
-        <Comments></Comments>
+      <VStack>
+        <Link href='/blog-00'><a>blog 0</a></Link>
+        <Link href='/blog-01'><a>blog 1</a></Link>
+      </VStack>
       </main>
     </div>
   )
