@@ -4,6 +4,7 @@ import { ChakraProvider} from '@chakra-ui/react'
 import theme from "../src/theme/index"
 import {useState} from "react"
 import { UserContext } from '../src/context/UserContext'
+import Layout from '../src/components/Layout/Layout'
 
 
 
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContext.Provider value={{authenticated,setAuthenticated}}>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
       </ChakraProvider>
     </UserContext.Provider>
   )
