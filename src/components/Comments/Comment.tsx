@@ -1,5 +1,5 @@
 import { Heading, HStack, Text, VStack } from "@chakra-ui/react"
-import type {Comment as CommentType} from "../../services/Comments.service"
+import type {CommentType} from "../../services/Comments.service"
 
 interface CommentProps {
     comment:CommentType

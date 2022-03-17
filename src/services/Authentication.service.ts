@@ -1,4 +1,5 @@
 
+
 interface LoginDetails {
     username:string,
     password:string
@@ -6,7 +7,7 @@ interface LoginDetails {
 
 export const AuthenticationService = {
     async login(json:LoginDetails) {
-
+        try {
         const res = await fetch(process.env.backendLoginUrl as string, {
             method:"POST",
             mode:'cors',
@@ -25,7 +26,11 @@ export const AuthenticationService = {
         window.localStorage.setItem('username',json.username)
         window.localStorage.setItem('jwt',responseJson.token)
         return true
-    },
+
+    } catch (e) {
+        console.error(e)
+        return false
+    }},
     logout() {
         console.log('logging out')
         window.localStorage.removeItem('username')

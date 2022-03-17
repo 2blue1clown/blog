@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserContext"
 import { AuthenticationService } from "../../services/Authentication.service"
 import toJSON from "../forms"
 
-export function useLogin() {
+export const  useLogin = () => {
 
     const {authenticated,setAuthenticated} = useContext(UserContext)
 
@@ -23,6 +23,7 @@ export function useLogin() {
 
     const login = async (formData:FormData) => {
         const isAuthenticated = await AuthenticationService.login(toJSON(formData))
+        console.log({isAuthenticated})
         setAuthenticated(isAuthenticated)
         if(isAuthenticated === false) { alert("Failed login attempt. Make sure username and password are correct") }
     }

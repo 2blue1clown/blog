@@ -1,5 +1,5 @@
 
-export interface Comment {
+export interface CommentType {
     topic:String,
     content:String,
     author?:String,
@@ -17,13 +17,14 @@ interface CommentDTO {
     username: string,
 }
 
-
-
 export const CommentsService = {
-    async get() {
+    async get(blogName:string) {
+        
         console.log('getting comments from database')
 
-        const res = await fetch(process.env.backendCommentsUrl as string, {
+        try{
+        
+        const res = await fetch(`${process.env.backendCommentsUrl}/${blogName}`, {
             method:"GET",
             mode:'cors',
             headers: {
@@ -31,13 +32,13 @@ export const CommentsService = {
                 'Content-Type':'application/json',
             },
         })
-
+        
         if(res.status >= 400){
             return []
         }
 
         const responseJson:CommentDTO[] = await res.json()
-        const comments:Comment[] =  responseJson.map(obj => ({
+        const comments:CommentType[] =  responseJson.map(obj => ({
             topic:obj.title,
             content:obj.content,
             date:new Date(obj.createdDate),
@@ -45,8 +46,10 @@ export const CommentsService = {
             author:obj.username
         }))
         return comments
-    },
-    async post(comment:Comment){
+    } catch (e) {
+        console.error(e)
+    }},
+    async post(comment:CommentType,blogName:string){
 
         console.log('posting comment to database')
         
@@ -64,7 +67,7 @@ export const CommentsService = {
                 body:JSON.stringify({
                     title:comment.topic,
                     content:comment.content,
-                    blogId:0
+                    blogName:blogName
                 })
             })
             const responseJson:CommentDTO = await res.json()

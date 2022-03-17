@@ -1,6 +1,6 @@
 import { Button, FormControl, Heading, Input, Textarea, VStack } from "@chakra-ui/react"
 import { FormEvent} from "react";
-import { Comment } from "../../services/Comments.service";
+import { CommentType } from "../../services/Comments.service";
 
 // interface NewCommentProps {
 //     handleNewComment: FormEventHandler<HTMLFormElement>
@@ -16,7 +16,7 @@ const NewComment = (props:NewCommentProps) => {
         e.preventDefault() 
         const formData = new FormData(e.currentTarget)
 
-        const newComment:Comment = {
+        const newComment:CommentType = {
             topic:formData.get('topic') as String,
             content:formData.get('content') as String
          }
