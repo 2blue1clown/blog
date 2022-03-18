@@ -1,30 +1,33 @@
 import { Button, FormControl, Heading, Input, Textarea, VStack } from "@chakra-ui/react"
+import { useRouter } from "next/router";
 import { FormEvent} from "react";
-import { CommentType } from "../../services/Comments.service";
+import { BlogComment } from "../../services/Comments.service";
 
-// interface NewCommentProps {
-//     handleNewComment: FormEventHandler<HTMLFormElement>
-// }
+
 
 interface NewCommentProps {
     addComment: Function,
 }
 
+
+
 const NewComment = (props:NewCommentProps) => {
+
+    const router = useRouter()
 
     const handleNewComment = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault() 
         const formData = new FormData(e.currentTarget)
 
-        const newComment:CommentType = {
-            topic:formData.get('topic') as String,
-            content:formData.get('content') as String
+        const newComment:BlogComment = {
+            topic:formData.get('topic') as string,
+            content:formData.get('content') as string,
+            blogName:router.pathname.slice(1) // slicing off the / at the start.
          }
 
         props.addComment(newComment)
         e.currentTarget.reset()
         
-        //get comments from the database
     }
     return (
         <VStack w='full' maxW='90ch'>

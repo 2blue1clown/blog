@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import { CommentsService, CommentType } from "../../services/Comments.service"
+import { CommentsService, BlogComment } from "../../services/Comments.service"
 
 export const useComments = () => {
 
-    const [comments,setComments] = useState<Array<CommentType>>([])
+    const [comments,setComments] = useState<Array<BlogComment>>([])
     const router = useRouter()
 
     useEffect( ()=> {
@@ -19,7 +19,7 @@ export const useComments = () => {
         fetchData()
     },[])
 
-    const addComment = async (newComment:CommentType ) => {
+    const addComment = async (newComment:BlogComment ) => {
         const res = await CommentsService.post(newComment,router.pathname.slice(1)) //the slice(1) gets rid of the / at the beginning of the path
         if(res){
             setComments([...comments,res]) //this is throwing an error for some reason.

@@ -1,20 +1,42 @@
 
-export interface CommentType {
-    topic:String,
-    content:String,
-    author?:String,
-    authorId?:String,
+
+
+export class BlogComment {
+    topic:string
+    content:string
+    author?:string
+    authorId?:string
     date?:Date
+    blogName:string
+    constructor(commentDTO:CommentDTO) {
+        this.topic = commentDTO.title
+        this.content = commentDTO.content
+        this.author = commentDTO.username
+        this.authorId = commentDTO.userId
+        this.date = new Date(commentDTO.createdDate)
+        this.blogName = commentDTO.blogName
+    }
 }
 
-interface CommentDTO {
-    blogId: number,
-    content: string,
-    createdDate: string,
-    id: string,
-    title: string,
-    userId: string,
-    username: string,
+
+class CommentDTO {
+    blogName: string;
+    content: string;
+    createdDate: string;
+    id: string | undefined;
+    title: string;
+    userId: string| undefined;
+    username: string | undefined;
+
+    constructor(comment:BlogComment) {
+        this.blogName =  comment.blogName,
+        this.content = comment.content,
+        this.title = comment.topic,
+        this.username = comment.author
+        this.userId = comment.authorId
+        this.createdDate = '' //maybe I shoudl think of a better way to do this.
+    }
+
 }
 
 export const CommentsService = {
@@ -38,18 +60,12 @@ export const CommentsService = {
         }
 
         const responseJson:CommentDTO[] = await res.json()
-        const comments:CommentType[] =  responseJson.map(obj => ({
-            topic:obj.title,
-            content:obj.content,
-            date:new Date(obj.createdDate),
-            authorId:obj.userId,
-            author:obj.username
-        }))
+        const comments:BlogComment[] =  responseJson.map(commentDTO => new BlogComment(commentDTO))
         return comments
     } catch (e) {
         console.error(e)
     }},
-    async post(comment:CommentType,blogName:string){
+    async post(comment:BlogComment,blogName:string){
 
         console.log('posting comment to database')
         
@@ -71,13 +87,7 @@ export const CommentsService = {
                 })
             })
             const responseJson:CommentDTO = await res.json()
-            const resComment = {
-                topic:responseJson.title,
-                content:responseJson.content,
-                date:new Date(responseJson.createdDate),
-                authorId:responseJson.userId,
-                author:responseJson.username
-            }
+            const resComment = new BlogComment(responseJson)
             return resComment
 
         } else {

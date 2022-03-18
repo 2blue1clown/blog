@@ -11,9 +11,9 @@ const withMDX = require('@next/mdx')({
 
 
 
-// const baseURL =  "http://localhost:5262"
+const baseURL =  "http://localhost:5262"
 
-const baseURL = "https://blogbackend20220308104133.azurewebsites.net"
+// const baseURL = "https://blogbackend20220308104133.azurewebsites.net"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

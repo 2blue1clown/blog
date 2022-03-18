@@ -5,7 +5,7 @@ import Authentication from "../Authentication/Authentication";
 
 export default function Layout({children}:any) {
 
-    const {colorMode, toggleColorMode} = useColorMode()
+    const {toggleColorMode} = useColorMode()
 
     return (
         <VStack width='full'>
