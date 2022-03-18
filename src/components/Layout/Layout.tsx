@@ -12,7 +12,7 @@ export default function Layout({children}:any) {
             <VStack width='full' maxW={'90ch'} padding={5}>
                 <HStack justifyContent='space-between'>
                 <HiddenAuthentication />
-                <Button onClick={toggleColorMode}>⚡</Button>
+                <Button onClick={toggleColorMode} zIndex={2}>⚡</Button>
                 </HStack>  
                 <main style={{width:'100%'}}>{children}</main>
             </VStack>

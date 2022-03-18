@@ -1,36 +1,21 @@
-import { Button, FormControl, FormLabel, HStack, Input, Text, VStack } from "@chakra-ui/react"
-import { FormEvent,} from "react"
+import { HStack } from "@chakra-ui/react"
 import { useLogin } from "../../utils/hooks/authentication"
+import Login from "./Login"
+import Logout from "./Logout"
 
-const Authentication = () => {
+interface AuthenticationProps {
+    onToggle: Function
+}
 
-    const {authenticated,login,logout} = useLogin()
+const Authentication = (props:AuthenticationProps) => {
 
-    const handleLogin = (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        //custom hook for logging in
-        login(formData)
-    }
+    const {authenticated} = useLogin()
  
     return (
         <HStack>
             {authenticated
-            ? <VStack>
-            <Text> Welcome {window.localStorage.getItem('username')}</Text>
-            <Button onClick={logout}>Logout</Button>
-            </VStack>
-            : <form onSubmit={handleLogin}>
-                <FormControl>
-                    <HStack gap={2}>
-                        <FormLabel htmlFor="username" m='0'>Username</FormLabel>
-                        <Input id='username' name='username' ></Input>
-                        <FormLabel htmlFor="password" m='0'>Password</FormLabel>
-                        <Input name="password" type='password'></Input>
-                        <Button type='submit' px='8'>Login</Button>
-                    </HStack>
-                </FormControl>
-            </form>
+            ? <Logout onToggle={props.onToggle}/>
+            : <Login onToggle={props.onToggle}/>
             } 
         </HStack>
     )
