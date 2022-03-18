@@ -1,6 +1,6 @@
 import { Button, HStack, useColorMode, VStack } from "@chakra-ui/react";
 
-import Authentication from "../Authentication/Authentication";
+import HiddenAuthentication from "../Authentication/HiddenAuthentication";
 
 
 export default function Layout({children}:any) {
@@ -9,9 +9,9 @@ export default function Layout({children}:any) {
 
     return (
         <VStack width='full'>
-            <VStack width='full' maxW={'90ch'}>
+            <VStack width='full' maxW={'90ch'} padding={5}>
                 <HStack justifyContent='space-between'>
-                <Authentication />
+                <HiddenAuthentication />
                 <Button onClick={toggleColorMode}>⚡</Button>
                 </HStack>  
                 <main style={{width:'100%'}}>{children}</main>

@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, HStack, Input, Text } from "@chakra-ui/react"
+import { Button, FormControl, FormLabel, HStack, Input, Text, VStack } from "@chakra-ui/react"
 import { FormEvent,} from "react"
 import { useLogin } from "../../utils/hooks/authentication"
 
@@ -16,17 +16,18 @@ const Authentication = () => {
     return (
         <HStack>
             {authenticated
-            ?<Text> Welcome {window.localStorage.getItem('username')}
+            ? <VStack>
+            <Text> Welcome {window.localStorage.getItem('username')}</Text>
             <Button onClick={logout}>Logout</Button>
-            </Text>
+            </VStack>
             : <form onSubmit={handleLogin}>
                 <FormControl>
-                    <HStack>
-                        <FormLabel htmlFor="username">Username</FormLabel>
-                        <Input id='username' name='username'></Input>
-                        <FormLabel htmlFor="password">Password</FormLabel>
+                    <HStack gap={2}>
+                        <FormLabel htmlFor="username" m='0'>Username</FormLabel>
+                        <Input id='username' name='username' ></Input>
+                        <FormLabel htmlFor="password" m='0'>Password</FormLabel>
                         <Input name="password" type='password'></Input>
-                        <Button type='submit'>Login</Button>
+                        <Button type='submit' px='8'>Login</Button>
                     </HStack>
                 </FormControl>
             </form>
