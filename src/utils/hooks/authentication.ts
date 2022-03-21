@@ -21,7 +21,7 @@ export const  useLogin = () => {
         onToggle()
         setTimeout(() => {
             setAuthenticated(false)
-        },500)
+        },1000)
         AuthenticationService.logout()
     }
 
@@ -36,7 +36,7 @@ export const  useLogin = () => {
                 },500)
                 
 
-            },5000)
+            },1000)
             setStage('successful login')
         } else {
             setStage('failed login')
