@@ -1,8 +1,9 @@
 import { Button, FormControl, FormLabel, HStack, Input, Text, VStack } from "@chakra-ui/react"
 import { FormEvent, useState,} from "react"
-import { InvalidationCondition, validateForm } from "../../utils/forms"
+import { type InvalidationCondition, validateForm } from "../../utils/forms"
 
 import { useLogin } from "../../utils/hooks/authentication"
+import ValidationErrors from "../ValidationErrors/ValidationErrors"
 
 interface LoginProps {
     onToggle: Function
@@ -11,13 +12,14 @@ interface LoginProps {
 
 const invalidatConditions: InvalidationCondition[] = [
     {
-        condition: (data:any) => data.username.length <= 2,
-        msg:'Username must be longer than 2 characters'
+        condition: (data:any) => data.username.length <= 2 || data.username.length >12,
+        msg:'Username length must be between 2 and 13 characters long.'
     },
     {
         condition: (data:any) => data.password.length <= 7,
         msg:'Password must be longer than 7 characters'
-    }
+    },
+
 ]
 
 
@@ -52,20 +54,13 @@ const Login = (props: LoginProps) => {
                         <Button type='submit' px='8'>Login</Button>
                     </HStack>
                 </FormControl>
-                    {errors.map(error => 
-                            {
-                                return <Text><span style={{color:'red'}}>** </span>{error}<span style={{color:'red'}}> **</span></Text>
-                            })}
-                    {stage === 'before login' && errors.length===0 && 
-                        
-                            <Text>🐠🐠🐠</Text>
-                    }
-                    
-                    {stage === 'processing login' && 
-                        <Text> ... Processing login ... </Text>
-                    }
-                    {stage === 'successful login' && <Text>Login successful! 💪✔</Text>}
-                    {stage === 'failed login' && <Text>Login failed... 😅❌</Text>}
+
+                <ValidationErrors errors={errors}></ValidationErrors>
+                
+                {stage === 'before login' && errors.length===0 && <Text>🐠🐠🐠</Text>}
+                {stage === 'processing login' && <Text> ... Processing login ... </Text>}
+                {stage === 'successful login' && <Text>Login successful! 💪✔</Text>}
+                {stage === 'failed login' && <Text>Login failed... 😅❌</Text>}
                 </VStack>
             </form>
 }

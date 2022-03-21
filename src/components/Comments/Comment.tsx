@@ -1,13 +1,12 @@
 import { Heading, HStack, Text, VStack } from "@chakra-ui/react"
-import type {CommentType} from "../../services/Comments.service"
+import { BlogComment } from "../../services/Comments.service"
+
 
 interface CommentProps {
-    comment:CommentType
+    comment:BlogComment
 }
 
 const Comment = (props:CommentProps) => {
-
-
 
     return (
         <VStack w="full" maxW={'90ch'}>

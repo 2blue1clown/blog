@@ -19,9 +19,11 @@ const Comments = () => {
                 </Heading>
                 {comments.map((comment,i) => <Comment comment={comment} key={i}></Comment>)}
                 <Fade  in={authenticated} style={{width:'100%'}}>
+
                     <Box width={'full'}>
                     <NewComment addComment={addComment} ></NewComment>
                     </Box>
+
                 </Fade>
                 
             </VStack>

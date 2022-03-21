@@ -11,15 +11,13 @@ export const toJSON = (formData:FormData) => {
     return json
 }
 
-export interface InvalidationCondition {
+export type InvalidationCondition = {
     condition: (data:any) => boolean,
     msg: string
 }
 
-
 export const validateForm = (formData: FormData,invalidationConditions:InvalidationCondition[]) => {
-    // username must be more than 2 ch but less than 12
-    // password must be more than 7 ch  
+
     const data = toJSON(formData)
     let errors:string[] = []
     let valid = true
