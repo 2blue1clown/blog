@@ -1,3 +1,9 @@
+## Introduction
+
+This is a personal blog page I created to allow me to share dynamic math components with my students. Unfortunately I have lost access to the backend of this blog, so am currently in the process of re-adding the authentication component of the webpage.
+
+Previously the backend was created with .NET 6 as a learning exercise but this time I will be making it internally in the Next.JS with a NoSQL database.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
