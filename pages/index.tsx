@@ -23,12 +23,8 @@ const Home: NextPage = () => {
             with Json Web Tokens - Page creation using a simple markdown file
             added to the /pages folder
           </Text>
-          <Link href="/blog-00">
-            <a>blog 0</a>
-          </Link>
-          <Link href="/blog-01">
-            <a>blog 1</a>
-          </Link>
+          <Link href="/blog-00">blog 0</Link>
+          <Link href="/blog-01">blog 1</Link>
         </VStack>
       </main>
     </div>
