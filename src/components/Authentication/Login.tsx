@@ -17,7 +17,7 @@ interface LoginProps {
   onToggle: Function;
 }
 
-const invalidatConditions: InvalidationCondition[] = [
+const invalidateConditions: InvalidationCondition[] = [
   {
     condition: (data: any) =>
       data.username.length <= 2 || data.username.length > 12,
@@ -38,7 +38,7 @@ const Login = (props: LoginProps) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    const { errors, valid } = validateForm(formData, invalidatConditions);
+    const { errors, valid } = validateForm(formData, invalidateConditions);
 
     if (valid) {
       login(formData, props.onToggle);
