@@ -10,4 +10,13 @@ export const COMMENT_DATA: Comment[] = [
     userId: "1",
     username: "Jono",
   },
+  {
+    blogName: "blog-00",
+    content: "This is the 2nd test comment",
+    createdDate: new Date("December 17, 1995 03:24:00"),
+    id: "2",
+    title: "From Data file",
+    userId: "2",
+    username: "Tim",
+  },
 ];
