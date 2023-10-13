@@ -15,15 +15,9 @@ export function middleware(request: NextRequest) {
   }
 }
 
-const logHeaders = (request: NextRequest) => {
-  //check the headers
-  console.log(request.headers.get("typ"));
-  console.log(request.headers.get("alg"));
-};
-
 const isAuthenticated = (request: NextRequest) => {
-  // logHeaders(request);
-  if (request.headers.get("typ") && request.headers.get("alg")) {
+  // console.log(request.headers.get("Authorization"));
+  if (request.headers.get("Authorization") === "Bearer <JWT>") {
     console.log("authenticated");
     return true;
   }

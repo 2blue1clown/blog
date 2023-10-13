@@ -5,6 +5,7 @@ type ResponseData = {
   message: string;
 };
 
+// currently just a place holder while i tested out how to use next api backends
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
