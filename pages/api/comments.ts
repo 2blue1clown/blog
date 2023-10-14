@@ -6,27 +6,38 @@ type ResponseData = {
   message: string;
 };
 
-export type Comment = {
+export interface NewComment {
   blogName: string;
   content: string;
-  createdDate: Date;
-  id: string;
   title: string;
   userId: string;
   username: string;
-};
+}
+
+export interface Comment extends NewComment {
+  createdDate: Date;
+  id: string;
+}
 
 // currently just a place holder while i tested out how to use next api backends
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Comment[]>
+  res: NextApiResponse<Comment[] | undefined>
 ) {
-  //   if (req.method === "POST") {
-  //     res.status(200).json({ message: "Hello, this was a post" });
-  //     console.log(req.body as LoginDetails);
-  //   }
   if (req.method === "GET") {
     res.status(200).json(COMMENT_DATA);
-    console.log(req.body as LoginDetails);
+  }
+  if (req.method === "POST") {
+    console.log(req.body);
+    const newComment: NewComment = req.body;
+
+    const finalComment = {
+      ...newComment,
+      createdDate: new Date(),
+      id: `${COMMENT_DATA.length + 1}`,
+    };
+    COMMENT_DATA.push(finalComment);
+
+    res.status(200).json(COMMENT_DATA);
   }
 }

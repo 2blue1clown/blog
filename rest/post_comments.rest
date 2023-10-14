@@ -1,0 +1,13 @@
+POST http://localhost:3000/api/comments
+Authorization: Bearer <JWT>
+Content-Type: application/json
+
+{
+    "blogName": "blog-00",
+    "content": "This is a comment to test the POST endpoint",
+    "title": "From REST file",
+    "userId": "2",
+    "username": "Tim"
+}
+
+
